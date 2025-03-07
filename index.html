@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎀To Zara🎀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eeaeca, #edb2d6, #edb4d8, #e9ba94); /* Gradiente com suas cores */
+            color: #827f7d;
+            font-family: 'Verdana', sans-serif;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            margin: 0;
+            width: 100%;
+        }
+
+        .snowflake {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.2); 
+            font-size: 1.5em;
+            animation: fall linear infinite;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        <!-- Adicionando a música de fundo -->
+        <audio autoplay loop>
+            <source src="https://github.com/fcjoske/nikusha/raw/f0de07c19f4f9d6f5f5ed82eb2e16bd2ca8e10e6/01.mp3" type="audio/mp3">
+            Seu navegador não suporta a tag de áudio.
+        </audio>
+        .sparkle {
+            font-size: 2em;
+            animation: sparkle 1.5s infinite alternate;
+            margin: 10px auto;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes sparkle {
+            0% { transform: scale(1); color: #ffcc00; }
+            50% { transform: scale(1.2); color: #ff6699; }
+            100% { transform: scale(1); color: #66ccff; }
+        }
+
+        .message-box {
+            background: linear-gradient(135deg, #ffb3d9, #ff80bf); /* Gradiente suave inicial */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), inset 0 0 30px rgba(255, 255, 255, 0.4); /* Sombra interna para efeito 3D */
+            font-size: 1.1em;
+            color: #4d4c4c; /* Texto em preto para garantir contraste */
+            margin: 20px auto;
+            max-width: 90%;
+            cursor: pointer;
+            overflow: hidden;
+            transform: perspective(600px);
+            transition: height 0.3s ease, opacity 0.5s ease;
+            max-height: 70vh;
+            overflow-y: auto;
+            animation: gradientShift 50s ease-in-out infinite; /* Efeito de animação suave com transição lenta */
+        }
+
+        @keyframes gradientShift {
+            0% { background: linear-gradient(135deg, #ffb3d9, #ff80bf); }
+            25% { background: linear-gradient(135deg, #ff80bf, #ff99cc); }
+            50% { background: linear-gradient(135deg, #ff99cc, #ffb3d9); }
+            75% { background: linear-gradient(135deg, #ffb3d9, #ff80bf); }
+            100% { background: linear-gradient(135deg, #ff80bf, #ff99cc); }
+        }
+
+        .message-content {
+            display: none;
+            opacity: 20;
+            transition: opacity 0.5s ease;
+        }
+
+        .message-box.open .message-content {
+            display: block;
+            opacity: 1;
+        }
+
+        .thank-you {
+            font-size: 1.5em;
+            color: #cc0033;
+            margin: 10px auto;
+            animation: pulse 1.5s infinite alternate;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .kirby-star {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3em;
+            animation: star-fall 2s infinite;
+        }
+
+        @keyframes star-fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .fortune-cookie {
+            width: 80px;
+            height: 80px;
+            background: url('https://github.com/fcjoske/nikusha/blob/main/kirbywalk%20(1).gif?raw=true') no-repeat center;
+            background-size: contain;
+            cursor: pointer;
+            margin: 20px auto;
+            transition: transform 0.2s;
+        }
+
+        .fortune-cookie:hover {
+            transform: scale(1.1);
+        }
+
+        .fortune-message {
+            font-size: 1.2em;
+            color: #e28a18;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkle">🎀 To Zara 🎀</div>
+
+    <div class="message-box" onclick="toggleMessage(this)">
+        Click to open the letter! ✉️
+        <div class="message-content">
+            Dear Zara, 💖<br><br>
+            Happy Women's Day! I want to congratulate you for today and remind you of the incredible talent you have for music. I hope I get to hear more of your songs in the future. 🎶<br><br>
+
+            You brightened my day when we talked, and I hope I can return the favor to you. ✨<br><br>
+
+            I’m so proud of everything you do, and I’m sure that your talent will continue to inspire others, just like it inspires me. 🌟<br><br>
+
+            Wishing you all the best today and always! 💐<br><br>
+
+            With gratitude and appreciation,<br>
+            Felipe 💌<br><br>
+        </div>
+    </div>
+
+    <div class="thank-you">Enjoy your Day 🎀</div>
+
+    <div class="kirby-star">
+        ✨
+    </div>
+
+    <div class="fortune-cookie" onclick="showFortune()"></div>
+    <div class="fortune-message" id="fortuneMessage"></div>
+
+    <script>
+        // Função para alternar a exibição da carta
+        function toggleMessage(box) {
+            box.classList.toggle('open');
+            const content = box.querySelector('.message-content');
+            content.style.display = box.classList.contains('open') ? 'block' : 'none';
+            content.style.opacity = box.classList.contains('open') ? '1' : '0';
+        }
+
+        // Frases de sorte
+        const fortunes = [
+            "Your future is as bright as your talent. 🌟",
+            "Every day is a step closer to your dreams. 🌠",
+            "The world is lucky to have someone as wonderful as you. 🍀",
+            "Good things come to those who believe in themselves. 🌼",
+            "The best is yet to come. Keep shining! ✨",
+            "Your passion will take you to amazing places. 🚀",
+            "Luck is on your side today. 🍀",
+            "Great things are coming your way. 🌈",
+            "Your talent will light up the world. 💫",
+            "Stay true to yourself, and success will follow. 🎯",
+            "Today is just the beginning of your journey. 🌻",
+            "You are destined for greatness. 🌟",
+            "May this year bring you new adventures and success. 🏆",
+            "Everything you touch turns to gold. ✨",
+            "Your hard work will pay off in amazing ways. 💪",
+            "The universe has big plans for you. 🌌",
+            "Keep believing, and wonderful things will happen. 🍀",
+            "You are on the right path to something amazing. 🌍",
+            "Success is in your future. Keep going! 🏅",
+            "Your creativity will lead you to incredible places. 🎨",
+            "You are capable of achieving all your dreams. 🌟",
+            "Your positive energy will attract amazing opportunities. ✨",
+            "Believe in yourself and all that you are. 💖",
+            "The best version of you is just around the corner. 🌠",
+            "Good things come to those who wait – and you’ve waited well. ⏳",
+            "Your hard work is about to pay off. 🎉",
+            "Trust the process, and everything will fall into place. 🌈",
+            "You will achieve greatness in everything you do. 🏆",
+            "Your strength is inspiring. Keep moving forward. 💪",
+            "The world needs your talent. Keep sharing it! 🌍"
+        ];
+
+        // Função para mostrar uma mensagem de sorte
+        function showFortune() {
+            const message = fortunes[Math.floor(Math.random() * fortunes.length)];
+            document.getElementById('fortuneMessage').innerText = message;
+        }
+    </script>
+</body>
+</html>
